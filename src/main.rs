@@ -46,11 +46,6 @@ fn main() {
     insert_element(&mut v, &b);
     insert_element(&mut v, &e);
 
-    // v.push(&a);
-    // v.push(&b);
-    // v.push(&c);
-    // v.push(&d);
-
     println!("{:#?}", v);
 }
 
@@ -72,7 +67,6 @@ fn insert_element<'a>(
                 return Ok(());
             }
         }
-        // return Err(ElemError::InsertionError);
     }
 
     list.push(&element);
