@@ -1,10 +1,9 @@
 enum ElemError {
-    InsertionError,
     OtherError,
+    InsertionError,
 }
 
 #[derive(Debug)]
-#[allow(unused)]
 struct Element<'a> {
     value: String,
     reference: Option<Vec<&'a Element<'a>>>,
@@ -44,7 +43,11 @@ fn main() {
     insert_element(&mut v, &a);
     insert_element(&mut v, &a);
     insert_element(&mut v, &b);
+    insert_element(&mut v, &c);
+    insert_element(&mut v, &d);
     insert_element(&mut v, &e);
+
+    // insert_element(&mut v, &d);
 
     println!("{:#?}", v);
 }
@@ -58,15 +61,12 @@ fn insert_element<'a>(
         return Ok(());
     }
     if let Some(x) = &element.reference {
-        for i in x.iter() {
-            if !list.contains(i) {
-                println!("References a non existent element!");
-                return Err(ElemError::InsertionError);
-            } else {
-                list.push(element);
-                return Ok(());
-            }
+        if let true = x.iter().all(|elem| list.contains(elem)) {
+            list.push(element);
+            return Ok(());
         }
+        println!("References a non existent element!");
+        return Err(ElemError::OtherError);
     }
 
     list.push(&element);
