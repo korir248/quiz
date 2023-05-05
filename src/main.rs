@@ -38,7 +38,7 @@ fn main() {
     let d = Element::new_ref("d", vec![&b]);
     let e = Element::new_ref("e", vec![&a, &d]);
 
-    let mut v: Vec<&Element> = Vec::new();
+    let mut v = Vec::new();
 
     insert_element(&mut v, &a);
     insert_element(&mut v, &a);
@@ -46,12 +46,9 @@ fn main() {
     insert_element(&mut v, &c);
     insert_element(&mut v, &d);
     insert_element(&mut v, &e);
-
-    // insert_element(&mut v, &d);
-
     println!("{:#?}", v);
 }
-
+// TODO: Add checking of indices
 fn insert_element<'a>(
     list: &mut Vec<&'a Element<'a>>,
     element: &'a Element,
